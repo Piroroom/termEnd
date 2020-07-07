@@ -51,6 +51,7 @@ int main()
 
 	//ƒOƒ‰ƒt•`‰æ“™
 	putNcurses();
+	
 
     return 0;
 }

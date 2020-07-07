@@ -5,6 +5,12 @@
 int putNcurses();
 void modeOne(); 
 void modeTwo();
-void drawGraph(int y, int x, int h, int w);
+void modeThree();
+
+void drawGraphOne(int y, int x, int h, int w);
+void drawGraphTwo(int y, int x, int h, int w);
+void drawGraphTwo1(int y, int x, int h, int w);
+
+
 
 

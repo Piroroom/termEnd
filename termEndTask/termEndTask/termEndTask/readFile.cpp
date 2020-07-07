@@ -50,8 +50,8 @@ void CSV2Array(const char *fileName) {
 
 		while (fgets(s, sizeof(s), fp) != 0) {
 
-			int status = sscanf_s(s, "%d/%d/%d,%lf,%lf,%d", &tempYear.year, &tempMon.month, &tempDay.day, &tempDay.maxTemp, &tempDay.minTemp,&tempDay.humidity);
-			if (status != 6)continue;
+			int status = sscanf_s(s, "%d/%d/%d,%lf,%lf,%d,%lf", &tempYear.year, &tempMon.month, &tempDay.day, &tempDay.maxTemp, &tempDay.minTemp,&tempDay.humidity,&tempDay.dayRainFall);
+			if (status != 7)continue;
 
 
 			DAY *tmpD = new DAY();
@@ -59,6 +59,7 @@ void CSV2Array(const char *fileName) {
 			tmpD->maxTemp = tempDay.maxTemp;
 			tmpD->minTemp = tempDay.minTemp;
 			tmpD->humidity = tempDay.humidity;
+			tmpD->dayRainFall = tempDay.dayRainFall;
 			tmpD->dayAve = aveDay(tmpD->maxTemp, tmpD->minTemp);//日の平均気温
 			tmpD->dayDifference = differenceDay(tmpD->maxTemp, tmpD->minTemp);//寒暖差
 			tmpD->discomfortIndex = computeDiscomfortIndex(tmpD->dayAve, tmpD->humidity);//不快指数
@@ -67,8 +68,10 @@ void CSV2Array(const char *fileName) {
 
 			if (tempMon.month != beforeMon) {
 				if (previousMon != NULL) {
-					previousMon->monthAve = aveMonth(previousMon->firstDay);//月の平均
+					previousMon->monthAve = aveMonth(previousMon->firstDay);//月の平均気温
 					previousMon->monthDifference = differenceMonth(previousMon->firstDay);//月寒暖差の平均
+					previousMon->monthRainFall= rainFallMonth(previousMon->firstDay);//月間降水量
+					//fprintf_s(stdout, "降水%lf\n", previousMon->monthRainFall);
 				}
 
 				MONTH *tmpM = new MONTH();
@@ -121,6 +124,9 @@ void CSV2Array(const char *fileName) {
 
 		previousYear->yearAve = aveYear(previousYear->firstMonth);//最後の年平均
 		previousYear->yearDifference = differenceYear(previousYear->firstMonth);//最後の年寒暖差平均
+
+
+		computeALLData(firstYear);
 
 		previousYear->isEnd = 1;
 		previousYear->nextYear = firstYear;//リストを環状に

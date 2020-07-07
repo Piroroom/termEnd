@@ -6,6 +6,7 @@ struct DAY
 	double maxTemp;
 	double minTemp;
 	int humidity;
+	double dayRainFall;
 	
 	double discomfortIndex;
 
@@ -21,6 +22,8 @@ struct MONTH
 
 	double monthAve;
 	double monthDifference;
+
+	double monthRainFall;
 
 	DAY *firstDay;
 	MONTH *nextMonth;

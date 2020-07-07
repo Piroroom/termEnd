@@ -10,7 +10,12 @@ double differenceMonth(DAY *first);//Œ‚Ì•½‹ÏŠ¦’g·
 double differenceYear(MONTH *first);//”NŠÔ‚Ì•½‹ÏŠ¦’g·
 
 double computeDiscomfortIndex(double, double);
+void computeALLData(YEAR *first);
+
+double rainFallMonth(DAY *first);
 
 int roundUp(double);
 int roundDown(double);
 int roundOff(double);
+
+extern double allDataAveMon[2][12];//1‹C‰·,2~…—Ê

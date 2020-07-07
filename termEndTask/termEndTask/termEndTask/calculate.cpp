@@ -4,7 +4,7 @@
 #include <Windows.h>
 #include "calculate.h"
 
-
+double allDataAveMon[2][12];
 
 double aveDay(double max, double min) {
 	return (max + min) / 2;
@@ -23,6 +23,7 @@ double aveMonth(DAY *first) {
 	first = preDay;
 	return temp / cnt;
 }
+
 
 double aveYear(MONTH *first) {
 	MONTH *preMon = NULL;//アドレス記憶用
@@ -83,6 +84,59 @@ double differenceYear(MONTH *first) {
 	first = preMon;
 	return temp / cnt;
 }
+
+
+double rainFallMonth(DAY *first) {
+	DAY *preDay = NULL;//アドレス記憶用
+	preDay = first;
+	double temp = 0;
+
+	while (first != NULL) {
+		temp += first->dayRainFall;
+		first = first->nextDay;
+
+	}
+	first = preDay;
+	return temp;
+}
+
+
+
+void computeALLData(YEAR *first) {
+	YEAR *preYear = NULL;//アドレス記憶用
+	preYear = first;
+
+	int cnt = 0;
+	int yearCnt = 0;
+	MONTH *preMon = preYear->firstMonth;
+
+	while (first!=NULL)
+	{
+		yearCnt++;
+		while (preMon!=NULL)
+		{
+			allDataAveMon[0][cnt] += preMon->monthAve;
+			allDataAveMon[1][cnt] += preMon->monthRainFall;
+			preMon = preMon->nextMonth;
+			cnt++;
+		}
+		first = first->nextYear;
+		if (first != NULL) {
+			preMon = first->firstMonth;
+		}
+		cnt = 0;
+	}
+	first = preYear;
+	fprintf_s(stdout, "%d年分\n", yearCnt);
+	for (int i = 0; i < 12; i++) {
+		allDataAveMon[0][i] /= yearCnt;
+		allDataAveMon[1][i] /= yearCnt;
+		fprintf_s(stdout, "%d月:気温%0.1f,降水量%0.1f\n", i+1, allDataAveMon[0][i], allDataAveMon[1][i]);
+	}
+}
+
+
+
 
 int roundOff(double n) {
 	double decimal = 0;
