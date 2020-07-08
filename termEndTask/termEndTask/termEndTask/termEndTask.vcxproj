@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="calculate.h" />
     <ClInclude Include="drawDisplay.h" />
+    <ClInclude Include="outPut.h" />
     <ClInclude Include="readFile.h" />
     <ClInclude Include="Setting.h" />
     <ClInclude Include="stdafx.h" />
@@ -163,6 +164,7 @@
     <ClCompile Include="..\..\..\8・9th\ex1\ex1\Setting.cpp" />
     <ClCompile Include="calculate.cpp" />
     <ClCompile Include="drawDisplay.cpp" />
+    <ClCompile Include="outPut.cpp" />
     <ClCompile Include="readFile.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

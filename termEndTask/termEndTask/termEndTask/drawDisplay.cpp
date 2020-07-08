@@ -222,8 +222,9 @@ void modeTwo() {
 	sprintf_s(str, "不快指数%0.1f", computeDiscomfortIndex(n, k));
 	mvprintw(9, 5,str);
 
-	mvprintw(11, 5, "'1'でグラフモード");
+	mvprintw(11, 5, "'1'で寒暖差グラフモード");
 	mvprintw(12, 5, "'2'でリセット");
+	mvprintw(13, 5, "'3'で降水量と平均気温グラフモード");
 	refresh();
 }
 
